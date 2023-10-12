@@ -20,6 +20,7 @@ export default createStore<rootState>({
             state.securitySelectedId = payload;
         },
         changeSafeTreeSelectedId(state, payload) {
+            console.log("payload", payload);
             state.safeTreeSelectedId = payload;
         },
     },

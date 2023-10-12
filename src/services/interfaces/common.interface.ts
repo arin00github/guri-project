@@ -4,6 +4,11 @@ export type modeParams = {
     auto_ctrl_yn: boolean;
 };
 
+export type OptionRow = {
+    label: string;
+    value: string | number;
+};
+
 export interface ResultForm<T extends object> {
     code: number;
     message: string;
