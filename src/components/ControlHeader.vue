@@ -15,26 +15,31 @@ export default defineComponent({
     },
     computed: {
         optionList() {
-            console.log("Control computed optionList", this.$props);
+            // console.log("Control computed optionList", this.$props);
             return this.$props.assetData?.map(dt => {
                 const assetId = dt.properties.id as string;
                 return { label: dt.properties.show_label as string, value: assetId.split(".")[1] };
             });
         },
         getSelectedId(): string {
-            console.log("Control computed getSelectedId", this.$props);
+            // console.log("Control computed getSelectedId", this.$props);
             if (!this.$props.assetData || this.$props.assetData.length === 0) return "";
             const newArray = this.$props.assetData?.map(dt => {
                 const assetId = dt.properties.id as string;
                 return { label: dt.properties.show_label as string, value: assetId.split(".")[1] };
             });
             const initialValue = newArray ? newArray[0].value : "";
-            return this.$props.selectedId || initialValue;
+            if (this.$props.selectedId) {
+                return this.$props.selectedId;
+            } else {
+                this.handleSelect(initialValue);
+                return initialValue;
+            }
         },
     },
     methods: {
         handleSelect(value: string) {
-            console.log("Control method handleSelect");
+            // console.log("Control method handleSelect");
             this.$store.commit("changeSafeTreeSelectedId", value);
         },
     },

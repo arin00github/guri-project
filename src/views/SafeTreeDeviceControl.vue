@@ -2,12 +2,13 @@
 import { defineComponent } from "vue";
 
 import ControlHeader from "@/components/ControlHeader.vue";
+import ControlContainer from "@/components/safeTree/ControlContainer.vue";
 import { getSafeTreeAssets } from "@/services/api/apiCollection";
 import { FeatureAsset } from "@/services/interfaces/common.interface";
 
 export default defineComponent({
     name: "SafeTreeDeviceControl",
-    components: { ControlHeader },
+    components: { ControlHeader, ControlContainer },
     computed: {
         selectedId(): string | undefined {
             console.log("View computed selected");
@@ -41,5 +42,6 @@ export default defineComponent({
 <template>
     <div>
         <ControlHeader :selected-id="selectedId" :asset-data="assetListData" />
+        <ControlContainer :selected-id="selectedId" />
     </div>
 </template>

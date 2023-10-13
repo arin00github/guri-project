@@ -1,18 +1,3 @@
-<template>
-    <el-container>
-        <el-header>
-            <el-button-group>
-                <el-button v-for="menu in menus" :key="menu.id">
-                    <router-link :to="menu.url">{{ menu.label }}</router-link>
-                </el-button>
-            </el-button-group>
-        </el-header>
-        <el-container>
-            <router-view />
-        </el-container>
-    </el-container>
-</template>
-
 <script lang="ts">
 import { defineComponent } from "vue";
 
@@ -31,6 +16,21 @@ export default defineComponent({
 });
 </script>
 
+<template>
+    <el-container>
+        <el-header>
+            <el-button-group>
+                <el-button v-for="menu in menus" :key="menu.id">
+                    <router-link :to="menu.url">{{ menu.label }}</router-link>
+                </el-button>
+            </el-button-group>
+        </el-header>
+        <el-container class="w-100">
+            <router-view />
+        </el-container>
+    </el-container>
+</template>
+
 <style lang="scss">
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -38,5 +38,8 @@ export default defineComponent({
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+}
+section.el-container > div {
+    width: 100%;
 }
 </style>
