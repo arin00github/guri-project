@@ -12,6 +12,7 @@ export default defineComponent({
     props: {
         selectedId: String,
         assetData: Object as PropType<FeatureAsset[] | undefined>,
+        pageType: String,
     },
     computed: {
         optionList() {
@@ -39,8 +40,11 @@ export default defineComponent({
     },
     methods: {
         handleSelect(value: string) {
-            // console.log("Control method handleSelect");
-            this.$store.commit("changeSafeTreeSelectedId", value);
+            if (this.$props.pageType === "safe-tree") {
+                this.$store.commit("changeSafeTreeSelectedId", value);
+            } else {
+                this.$store.commit("changeSecuritySelectedId", value);
+            }
         },
     },
 });

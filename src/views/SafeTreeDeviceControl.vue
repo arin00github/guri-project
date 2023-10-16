@@ -41,7 +41,7 @@ export default defineComponent({
 
 <template>
     <div>
-        <ControlHeader :selected-id="selectedId" :asset-data="assetListData" />
+        <ControlHeader :selected-id="selectedId" :asset-data="assetListData" page-type="safe-tree" />
         <ControlContainer :selected-id="selectedId" />
     </div>
 </template>

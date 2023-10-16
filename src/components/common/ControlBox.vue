@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { ElCard, ElSpace, ElRow, ElCol } from "element-plus";
+import { ElCard, ElRow } from "element-plus";
 
 import { deviceProperty, oprtOptions, windStrOptions } from "../../utils/constant";
 
@@ -14,7 +14,7 @@ type StatsUnitType = { statsLabel: string; statsValue: string };
 
 export default defineComponent({
     name: "ControlBox",
-    components: { ElCard, StatsUnit, ElRow, ElCol },
+    components: { ElCard, StatsUnit, ElRow },
     props: {
         title: String,
         deviceType: String,
@@ -37,9 +37,6 @@ export default defineComponent({
         }
     },
     methods: {
-        combinePropertiesFC() {
-            console.log(" this.$props", this.$props);
-        },
         searchDataByProperty(deviceEnName: string, keyString: keyof KeyProperty) {
             const findObject = deviceProperty.find(property => property.enName === deviceEnName);
             return findObject ? findObject[keyString] : "";
@@ -76,12 +73,24 @@ export default defineComponent({
 
 <template>
     <el-card>
-        <h4>{{ title }}</h4>
+        <div class="title-name">{{ title }}</div>
 
-        <el-row class="w-100">
-            <el-col v-for="(unit, idx) in statsArray" :key="idx">
-                <stats-unit :title="unit.statsLabel" :statsValue="unit.statsValue" />
-            </el-col>
+        <el-row class="w-100 stats-wrap">
+            <stats-unit
+                v-for="(unit, idx) in statsArray"
+                :key="idx"
+                :title="unit.statsLabel"
+                :statsValue="unit.statsValue"
+            />
         </el-row>
     </el-card>
 </template>
+
+<style>
+.title-name {
+    padding-bottom: 15px;
+}
+.stats-wrap {
+    justify-content: space-between;
+}
+</style>

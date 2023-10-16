@@ -42,4 +42,7 @@ export default defineComponent({
 section.el-container > div {
     width: 100%;
 }
+.d-flex {
+    display: flex;
+}
 </style>
