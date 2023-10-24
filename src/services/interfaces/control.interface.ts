@@ -6,6 +6,14 @@ export interface ModeState {
     auto_ctrl_yn: boolean;
 }
 
+export type controlType = {
+    label: string;
+    key: string;
+    type: "switch" | "input" | "select" | "calendar" | "";
+    value: unknown;
+    errorMsg?: string;
+};
+
 export interface BasicDeviceType {
     dvcId: string;
     dvcTypeNm?: string;

@@ -7,6 +7,7 @@ import { getSecurityZoneDetail } from "../../services/api/apiCollection";
 import { SecurityZoneDetail } from "../../services/interfaces/control.interface";
 import { combineProperties } from "../common/control";
 import ControlBox from "../common/ControlBox.vue";
+import ControlModal from "../common/ControlModal.vue";
 
 const deviceList = [
     { labelName: "냉난방기", keyName: "dvcARCO" },
@@ -19,7 +20,7 @@ const deviceList = [
 
 export default defineComponent({
     name: "ControlContainer",
-    components: { ElContainer, ElRow, ElCol, ControlBox },
+    components: { ElContainer, ElRow, ElCol, ControlBox, ControlModal },
     props: {
         selectedId: String,
     },
@@ -80,6 +81,7 @@ export default defineComponent({
         return {
             mode: "auto",
             rawDetailData: undefined as SecurityZoneDetail | undefined,
+            selectedDevice: undefined as string | undefined,
         };
     },
     methods: {
@@ -97,6 +99,9 @@ export default defineComponent({
             } else {
                 return 6;
             }
+        },
+        handleSelectDevice(deviceType: string) {
+            this.selectedDevice = deviceType;
         },
     },
 });
@@ -117,6 +122,10 @@ export default defineComponent({
             </el-row>
         </el-container>
     </el-container>
+    <control-modal
+        :is-open="true"
+        :control-data="editedDevices.find(dev => dev.dvcType === selectedDevice)?.dvcData"
+    ></control-modal>
 </template>
 
 <style>
@@ -129,8 +138,10 @@ export default defineComponent({
 }
 .page-title {
     color: white;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    text-align: left;
+    font-size: 18px;
 }
 .el-col.card {
     margin-bottom: 20px;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { ElCard, ElRow } from "element-plus";
+import { ElCard, ElRow, ElButton } from "element-plus";
 
 import { deviceProperty, oprtOptions, windStrOptions } from "../../utils/constant";
 
@@ -14,7 +14,7 @@ type StatsUnitType = { statsLabel: string; statsValue: string };
 
 export default defineComponent({
     name: "ControlBox",
-    components: { ElCard, StatsUnit, ElRow },
+    components: { ElCard, StatsUnit, ElRow, ElButton },
     props: {
         title: String,
         deviceType: String,
@@ -72,8 +72,11 @@ export default defineComponent({
 </script>
 
 <template>
-    <el-card>
-        <div class="title-name">{{ title }}</div>
+    <el-card bodyClass="card-body">
+        <div class="card-title">
+            <div class="title-name">{{ title }}</div>
+            <el-button>설정</el-button>
+        </div>
 
         <el-row class="w-100 stats-wrap">
             <stats-unit
@@ -86,11 +89,25 @@ export default defineComponent({
     </el-card>
 </template>
 
-<style>
+<style lang="scss">
+.card-body {
+    padding: 0;
+}
+.card-title {
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 40px;
+    height: 40px;
+}
 .title-name {
-    padding-bottom: 15px;
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 18px;
 }
 .stats-wrap {
     justify-content: space-between;
+    padding: 32px 24px;
 }
 </style>

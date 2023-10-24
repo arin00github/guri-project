@@ -2,13 +2,13 @@
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
 
-import { ElContainer, ElSelect, ElOption, ElText } from "element-plus";
+import { ElContainer, ElSelect, ElOption } from "element-plus";
 
 import { FeatureAsset } from "@/services/interfaces/common.interface";
 
 export default defineComponent({
     name: "ControlHeader",
-    components: { ElContainer, ElSelect, ElOption, ElText },
+    components: { ElContainer, ElSelect, ElOption },
     props: {
         selectedId: String,
         assetData: Object as PropType<FeatureAsset[] | undefined>,
@@ -52,14 +52,38 @@ export default defineComponent({
 
 <template>
     <el-container>
-        <el-text>안심보호 자산목록</el-text>
-        <el-select @change="handleSelect" v-model="getSelectedId" placeholder="자산 선택">
-            <el-option
-                v-for="(asset, idx) in optionList"
-                :key="idx"
-                :value="asset.value"
-                :label="asset.label"
-            ></el-option>
-        </el-select>
+        <div class="control-header">
+            <div class="control-label">자산 선택</div>
+            <el-select
+                class="control-header-select"
+                @change="handleSelect"
+                v-model="getSelectedId"
+                placeholder="자산 선택"
+            >
+                <el-option
+                    v-for="(asset, idx) in optionList"
+                    :key="idx"
+                    :value="asset.value"
+                    :label="asset.label"
+                ></el-option>
+            </el-select>
+        </div>
     </el-container>
 </template>
+
+<style lang="scss">
+.control-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    .control-header-select {
+        width: 280px;
+    }
+    .control-label {
+        color: white;
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+}
+</style>

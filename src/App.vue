@@ -25,13 +25,16 @@ export default defineComponent({
                 </el-button>
             </el-button-group>
         </el-header>
-        <el-container class="w-100">
+        <el-container class="w-100 page-content">
             <router-view />
         </el-container>
     </el-container>
 </template>
 
 <style lang="scss">
+body {
+    margin: 0;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -44,5 +47,8 @@ section.el-container > div {
 }
 .d-flex {
     display: flex;
+}
+.page-content {
+    padding: 0 30px;
 }
 </style>
